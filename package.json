@@ -1,0 +1,48 @@
+{
+  "name": "plead-writer",
+  "version": "0.1.0",
+  "description": "Agente inteligente para la edición profesional de documentos con IA",
+  "keywords": ["editor", "markdown", "documents", "ai", "writing", "productivity"],
+  "homepage": "https://github.com/tu-usuario/plead-writer",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/tu-usuario/plead-writer.git"
+  },
+  "bugs": {
+    "url": "https://github.com/tu-usuario/plead-writer/issues"
+  },
+  "license": "MIT",
+  "author": "ple.ad writer team",
+  "private": false,
+  "scripts": {
+    "dev": "next dev --hostname 0.0.0.0",
+    "build": "next build",
+    "start": "next start",
+    "lint": "next lint"
+  },
+  "dependencies": {
+    "next": "^15.0.0",
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1",
+    "@lexical/react": "^0.17.1",
+    "lexical": "^0.17.1",
+    "@lexical/rich-text": "^0.17.1",
+    "@lexical/plain-text": "^0.17.1",
+    "@lexical/utils": "^0.17.1",
+    "@lexical/list": "^0.17.1",
+    "@lexical/link": "^0.17.1",
+    "@lexical/html": "^0.17.1",
+    "@lexical/code": "^0.17.1",
+    "docx": "^8.5.0",
+    "file-saver": "^2.0.5"
+  },
+  "devDependencies": {
+    "@types/node": "^20",
+    "@types/react": "^18.3.0",
+    "@types/react-dom": "^18.3.0",
+    "eslint": "^8",
+    "eslint-config-next": "^15.0.0",
+    "typescript": "^5",
+    "@types/file-saver": "^2.0.7"
+  }
+} 
