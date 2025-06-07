@@ -1,12 +1,13 @@
-import React from 'react'
+import { Inter } from 'next/font/google'
 import './globals.css'
-import './responsive-improvements.css'
 import type { Metadata } from 'next'
-import ChatInterface from '../components/ChatInterface'
+import { DocumentProvider } from '../context/DocumentContext'
+
+const inter = Inter({ subsets: ['latin'], display: 'swap', variable: '--font-inter' })
 
 export const metadata: Metadata = {
-  title: 'ple.ad writer - Agente de edición de documentos',
-  description: 'Agente inteligente para la edición profesional de documentos con IA',
+  title: 'ple.ad writer - Editor Inteligente',
+  description: 'Editor de documentos con IA integrada',
 }
 
 export default function RootLayout({
@@ -16,138 +17,92 @@ export default function RootLayout({
 }) {
   return (
     <html lang="es" suppressHydrationWarning>
-      <body suppressHydrationWarning>
-        {/* Header minimalista */}
-        <header className="app-header">
-          <div className="header-content">
-            <div className="header-brand">
-              <div className="brand-logo">
-                <div className="logo-icon"></div>
-                <h1 className="brand-name">ple.ad writer</h1>
-              </div>
-              <span className="brand-tagline">Agente de edición de documentos</span>
-            </div>
-            
-            <nav className="header-nav">
-              <span className="nav-subtitle">Agente inteligente para edición profesional</span>
-            </nav>
-
-            <div className="header-actions">
-              <button className="action-button" id="help-btn" title="Ayuda">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
-                  <circle cx="12" cy="12" r="10"/>
-                  <path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"/>
-                  <circle cx="12" cy="17" r="1"/>
-                </svg>
-              </button>
-              <button className="action-button" id="settings-btn" title="Configuración">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
-                  <circle cx="12" cy="12" r="3"/>
-                  <path d="M12 1v6m0 6v6m11-7h-6m-6 0H1"/>
-                </svg>
-              </button>
-              <div className="user-avatar" id="user-menu" title="Usuario">
-                <span>KA</span>
-              </div>
-            </div>
-          </div>
-        </header>
-
-        {/* Layout principal */}
-        <div className="app-layout">
-          <main className="main-content">
-            {children}
-          </main>
-          
-          {/* Sidebar: DocumentManager + Chat */}
-          <aside className="chat-sidebar">
-            <div id="document-manager-container"></div>
-            
-            <div className="chat-header">
-              <div className="chat-title">
-                <svg className="chat-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor">
-                  <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/>
-                </svg>
-                <h3>Asistente</h3>
-              </div>
-            </div>
-            
-            <div className="chat-content">
-              <div className="chat-messages">
-                <div className="message-welcome">
-                  <div className="message-content">
-                    <p>Asistente de edición disponible.</p>
-                    <p className="welcome-description">Pregúntame sobre corrección, estilo o mejoras para tu documento.</p>
+      <body className={`${inter.variable} font-sans`} suppressHydrationWarning>
+        <DocumentProvider>
+          {/* Header sofisticado con glassmorphism */}
+          <header className="app-header-enhanced">
+            <div className="header-content-enhanced">
+              <div className="header-brand-enhanced">
+                <div className="brand-logo-enhanced">
+                  <div className="logo-icon-enhanced">
+                    <svg 
+                      className="logo-svg" 
+                      width="24" 
+                      height="24" 
+                      viewBox="0 0 24 24" 
+                      fill="none" 
+                      stroke="currentColor" 
+                      strokeWidth="2"
+                    >
+                      <path 
+                        className="logo-path-main" 
+                        d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"
+                      />
+                      <polyline 
+                        className="logo-path-fold" 
+                        points="14,2 14,8 20,8"
+                      />
+                      <g className="logo-content">
+                        <line 
+                          className="logo-line" 
+                          x1="16" y1="13" x2="8" y2="13"
+                        />
+                        <line 
+                          className="logo-line" 
+                          x1="16" y1="17" x2="8" y2="17"
+                        />
+                        <line 
+                          className="logo-line" 
+                          x1="10" y1="9" x2="8" y2="9"
+                        />
+                      </g>
+                    </svg>
+                  </div>
+                  <div className="brand-text">
+                    <div className="brand-name-enhanced">ple.ad writer</div>
+                    <div className="brand-tagline-enhanced">Editor Inteligente con IA</div>
                   </div>
                 </div>
               </div>
-              
-              <ChatInterface />
+
+              <nav className="header-nav-enhanced">
+                <div className="nav-subtitle-enhanced">
+                  <span className="nav-item">Documento único</span>
+                  <span className="nav-separator">•</span>
+                  <span className="nav-item">Sin guardar</span>
+                  <span className="nav-separator">•</span>
+                  <span className="nav-item">Edición en tiempo real</span>
+                </div>
+              </nav>
+
+              <div className="header-status-enhanced">
+                <div className="status-badge-enhanced">
+                  <div className="status-icon">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                      <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/>
+                      <circle className="status-dot" cx="12" cy="11" r="1"/>
+                      <circle className="status-dot" cx="16" cy="11" r="1"/>
+                      <circle className="status-dot" cx="8" cy="11" r="1"/>
+                    </svg>
+                  </div>
+                  <span className="status-text">IA Activa</span>
+                  <div className="status-glow"></div>
+                </div>
+              </div>
             </div>
-          </aside>
-        </div>
+            
+            {/* Gradiente de borde sutil */}
+            <div className="header-border-gradient"></div>
+          </header>
 
-        {/* Scripts de funcionalidad */}
-        <script
-          dangerouslySetInnerHTML={{
-            __html: `
-              const connectEditorFunctions = () => {
-                const toolbar = document.querySelector('.simple-toolbar');
-                if (toolbar) {
-                  const markdownBtn = toolbar.querySelector('.export-button');
-                  const docxBtn = toolbar.querySelector('.primary-button');
-                  
-                  if (markdownBtn) {
-                    window.showMarkdown = () => markdownBtn.click();
-                  }
-                  
-                  if (docxBtn) {
-                    window.exportToDocx = () => docxBtn.click();
-                  }
-                  
-                  console.log('Editor functions connected');
-                } else {
-                  setTimeout(connectEditorFunctions, 500);
-                }
-              };
-
-              setTimeout(connectEditorFunctions, 1000);
-
-              window.createNewDocument = () => {
-                const newBtn = document.querySelector('.action-btn.primary');
-                if (newBtn) {
-                  newBtn.click();
-                } else {
-                  console.log('Creating new document...');
-                  if (confirm('¿Crear un nuevo documento? Los cambios no guardados se perderán.')) {
-                    window.location.reload();
-                  }
-                }
-              };
-
-              window.saveCurrentDocument = () => {
-                console.log('Auto-save activated');
-                
-                const saveBtn = document.getElementById('save-doc-btn');
-                if (saveBtn) {
-                  const originalText = saveBtn.innerHTML;
-                  saveBtn.innerHTML = '<span class="nav-icon">✓</span><span class="nav-label">Guardado</span>';
-                  saveBtn.style.background = '#28a745';
-                  saveBtn.style.color = 'white';
-                  
-                  setTimeout(() => {
-                    saveBtn.innerHTML = originalText;
-                    saveBtn.style.background = '';
-                    saveBtn.style.color = '';
-                  }, 2000);
-                }
-                
-                return true;
-              };
-                      `
-        }}
-      />
-    </body>
-  </html>
+          {/* Layout principal - Solo editor, sin sidebar */}
+          <div className="app-layout-fullscreen">
+            <main className="main-content-fullscreen">
+              {children}
+            </main>
+          </div>
+        </DocumentProvider>
+      </body>
+    </html>
   )
 } 
