@@ -56,13 +56,13 @@ export default function RootLayout({
                           x1="10" y1="9" x2="8" y2="9"
                         />
                       </g>
-                    </svg>
-                  </div>
+                </svg>
+              </div>
                   <div className="brand-text">
                     <div className="brand-name-enhanced">ple.ad writer</div>
                     <div className="brand-tagline-enhanced">Editor Inteligente con IA</div>
-                  </div>
-                </div>
+            </div>
+          </div>
               </div>
 
               <nav className="header-nav-enhanced">
@@ -72,9 +72,9 @@ export default function RootLayout({
                   <span className="nav-item">Sin guardar</span>
                   <span className="nav-separator">•</span>
                   <span className="nav-item">Edición en tiempo real</span>
-                </div>
+            </div>
               </nav>
-
+            
               <div className="header-status-enhanced">
                 <div className="status-badge-enhanced">
                   <div className="status-icon">
@@ -89,8 +89,8 @@ export default function RootLayout({
                   <div className="status-glow"></div>
                 </div>
               </div>
-            </div>
-            
+        </div>
+
             {/* Gradiente de borde sutil */}
             <div className="header-border-gradient"></div>
           </header>
@@ -102,7 +102,7 @@ export default function RootLayout({
             </main>
           </div>
         </DocumentProvider>
-      </body>
-    </html>
+    </body>
+  </html>
   )
 } 
