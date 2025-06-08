@@ -1,6 +1,7 @@
 # ✍️ ple.ad writer
 
-> **Editor de documentos inteligente con IA integrada - Versión 2.0**
+> **Editor de documentos inteligente con IA integrada - Versión 2.0**  
+> **Desarrollado por [coagente](https://coagente.com)**
 
 Un editor de documentos moderno con vista dual (Markdown/Preview) que combina una interfaz elegante con asistencia inteligente de IA para la escritura profesional. Ahora con **sistema de preview de cambios** y **control total** sobre las ediciones de IA.
 
@@ -10,6 +11,8 @@ Un editor de documentos moderno con vista dual (Markdown/Preview) que combina un
 ![TypeScript](https://img.shields.io/badge/TypeScript-5.x-blue)
 ![Docker](https://img.shields.io/badge/Docker-Ready-2496ED)
 ![License](https://img.shields.io/badge/license-MIT-green)
+![GitHub](https://img.shields.io/badge/GitHub-coagente%2Fdocumento-blue?logo=github)
+![Company](https://img.shields.io/badge/by-coagente.com-orange)
 
 ## 🌟 Características Principales
 
@@ -77,7 +80,7 @@ Visita **[http://localhost:3000](http://localhost:3000)** para usar la aplicaci�
 ### Instalación Local
 ```bash
 # Clonar e instalar
-git clone [tu-repo]
+git clone https://github.com/coagente/documento.git
 cd documento
 npm install
 
@@ -100,7 +103,7 @@ npm run dev
 
 1. **Clonar el repositorio**:
    ```bash
-   git clone [url-del-repositorio]
+   git clone https://github.com/coagente/documento.git
    cd documento
    ```
 
@@ -185,7 +188,7 @@ NEXT_PUBLIC_APP_NAME=ple.ad writer
 1. **Preparar servidor**:
    ```bash
    # Clonar repositorio
-   git clone [url-del-repositorio]
+   git clone https://github.com/coagente/documento.git
    cd documento
    
    # Copiar configuración de producción
@@ -506,7 +509,7 @@ npm run lint         # Linter de código TypeScript
 
 ## 🤝 Contribuir
 
-¡Las contribuciones son bienvenidas! Este proyecto está listo para colaboración.
+¡Las contribuciones son bienvenidas! Este proyecto es de código abierto y está desarrollado por **[coagente](https://coagente.com)**.
 
 ### **Áreas de contribución:**
 - **Frontend**: React/TypeScript/CSS
@@ -517,11 +520,16 @@ npm run lint         # Linter de código TypeScript
 - **Testing**: Unit/Integration tests
 
 ### **Cómo contribuir:**
-1. **Fork** del repositorio
+1. **Fork** del [repositorio](https://github.com/coagente/documento)
 2. **Crear rama**: `git checkout -b feature/NuevaFuncionalidad`
 3. **Desarrollar** siguiendo las convenciones existentes
 4. **Testing**: Verificar en múltiples dispositivos
 5. **Pull Request** con descripción detallada
+
+### **¿Necesitas ayuda?**
+- 📧 **Email**: [info@coagente.com](mailto:info@coagente.com)
+- 🌐 **Website**: [coagente.com](https://coagente.com)
+- 🐙 **Issues**: [GitHub Issues](https://github.com/coagente/documento/issues)
 
 ## 🚧 Roadmap
 
@@ -584,5 +592,15 @@ MIT License - Ver [LICENSE](LICENSE) para detalles completos.
 **🚀 Inicio inmediato**: `docker compose up --build` → http://localhost:3000
 
 **🔍 Control total**: Ve, revisa y aprueba cada cambio de IA
+
+---
+
+### 🏢 Desarrollado por coagente
+
+**[coagente.com](https://coagente.com)** - Soluciones inteligentes con IA
+
+📧 **Contacto**: [info@coagente.com](mailto:info@coagente.com)  
+🐙 **GitHub**: [github.com/coagente](https://github.com/coagente)  
+🌐 **Repositorio**: [github.com/coagente/documento](https://github.com/coagente/documento)
 
 </div> 
