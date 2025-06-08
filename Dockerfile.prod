@@ -1,0 +1,72 @@
+# ================================
+# Multi-stage build para producción
+# ================================
+
+# Etapa 1: Dependencias
+FROM node:18-alpine AS deps
+RUN apk add --no-cache libc6-compat
+WORKDIR /app
+
+# Copiar archivos de dependencias
+COPY package.json package-lock.json ./
+# Instalar solo dependencias de producción
+RUN npm ci --only=production && npm cache clean --force
+
+# ================================
+# Etapa 2: Builder
+FROM node:18-alpine AS builder
+WORKDIR /app
+
+# Copiar dependencias desde la etapa anterior
+COPY --from=deps /app/node_modules ./node_modules
+COPY . .
+
+# Instalar todas las dependencias (incluyendo devDependencies)
+RUN npm ci
+
+# Build optimizado para producción
+ENV NODE_ENV=production
+ENV NEXT_TELEMETRY_DISABLED=1
+RUN npm run build
+
+# ================================
+# Etapa 3: Runner (Imagen final)
+FROM node:18-alpine AS runner
+WORKDIR /app
+
+# Crear usuario no-root para seguridad
+RUN addgroup --system --gid 1001 nodejs
+RUN adduser --system --uid 1001 nextjs
+
+# Instalar herramientas necesarias
+RUN apk add --no-cache curl dumb-init
+
+# Copiar archivos necesarios para producción
+COPY --from=builder /app/package.json ./package.json
+
+# Crear directorio public y copiar archivos si existen
+RUN mkdir -p ./public
+
+# Copiar build de Next.js con permisos correctos
+COPY --from=builder --chown=nextjs:nodejs /app/.next/standalone ./
+COPY --from=builder --chown=nextjs:nodejs /app/.next/static ./.next/static
+
+# Variables de entorno optimizadas
+ENV NODE_ENV=production
+ENV NEXT_TELEMETRY_DISABLED=1
+ENV PORT=3000
+ENV HOSTNAME="0.0.0.0"
+
+# Configuración de salud
+HEALTHCHECK --interval=30s --timeout=3s --start-period=5s --retries=3 \
+  CMD curl -f http://localhost:3000/api/health || exit 1
+
+# Cambiar a usuario no-root
+USER nextjs
+
+# Exponer puerto
+EXPOSE 3000
+
+# Comando optimizado con dumb-init para manejo de señales
+ENTRYPOINT ["dumb-init", "--"]
+CMD ["node", "server.js"] 
