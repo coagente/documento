@@ -88,6 +88,236 @@ echo "GEMINI_API_KEY=tu_api_key_aqui" > .env
 npm run dev
 ```
 
+## 👨‍💻 Desarrollo
+
+### **Requisitos del Sistema**
+- **Node.js**: 18.17.0 o superior
+- **npm**: 9.0.0 o superior  
+- **Docker**: 20.10+ (opcional pero recomendado)
+- **Git**: Para control de versiones
+
+### **Instalación para Desarrollo**
+
+1. **Clonar el repositorio**:
+   ```bash
+   git clone [url-del-repositorio]
+   cd documento
+   ```
+
+2. **Instalar dependencias**:
+   ```bash
+   npm install
+   ```
+
+3. **Configurar variables de entorno**:
+   ```bash
+   # Copiar archivo de ejemplo
+   cp .env.example .env
+   
+   # Editar con tus API keys
+   # GEMINI_API_KEY=tu_api_key_aqui (opcional)
+   ```
+
+4. **Ejecutar en modo desarrollo**:
+   ```bash
+   npm run dev
+   ```
+
+5. **Abrir en navegador**: [http://localhost:3000](http://localhost:3000)
+
+### **Scripts de Desarrollo**
+```bash
+npm run dev          # Servidor de desarrollo con hot reload
+npm run build        # Build de producción
+npm run start        # Servidor de producción local
+npm run lint         # Linter ESLint + TypeScript
+npm run type-check   # Verificación de tipos TypeScript
+```
+
+### **Desarrollo con Docker**
+```bash
+# Desarrollo con hot reload
+docker compose up --build
+
+# Solo rebuild cuando cambien dependencias
+docker compose up
+```
+
+### **Estructura para Desarrollo**
+```
+src/
+├── app/
+│   ├── layout.tsx           # Layout principal
+│   ├── page.tsx             # Página wrapper
+│   ├── globals.css          # Estilos consolidados (3700+ líneas)
+│   └── api/
+│       ├── chat/route.ts    # API de Gemini AI
+│       └── health/route.ts  # Health check endpoint
+├── components/
+│   └── FullscreenEditor.tsx # Editor principal
+├── context/
+│   └── DocumentContext.tsx  # Estado global
+└── types/
+    └── global.d.ts          # Tipos TypeScript
+```
+
+### **Variables de Entorno - Desarrollo**
+```bash
+# .env (desarrollo)
+GEMINI_API_KEY=tu_gemini_api_key_aqui
+NODE_ENV=development
+NEXT_PUBLIC_APP_NAME=ple.ad writer
+```
+
+---
+
+## 🚀 Producción
+
+### **Requisitos del Servidor**
+- **CPU**: 2+ cores (mínimo 1 core)
+- **RAM**: 2GB+ (mínimo 1GB)
+- **Docker**: 20.10+ y Docker Compose v2
+- **Almacenamiento**: 10GB+ disponibles
+- **Red**: Puerto 80 y 443 abiertos
+
+### **Deployment Rápido**
+
+1. **Preparar servidor**:
+   ```bash
+   # Clonar repositorio
+   git clone [url-del-repositorio]
+   cd documento
+   
+   # Copiar configuración de producción
+   cp env.production.template .env.production
+   ```
+
+2. **Configurar variables de entorno**:
+   ```bash
+   # Editar .env.production con tus valores
+   nano .env.production
+   
+   # Variables críticas:
+   # GEMINI_API_KEY=tu_api_key_produccion
+   # NODE_ENV=production
+   # NEXT_PUBLIC_APP_URL=https://tu-dominio.com
+   ```
+
+3. **Desplegar con un comando**:
+   ```bash
+   # Script automatizado de deployment
+   chmod +x start-production.sh
+   ./start-production.sh
+   ```
+
+### **Docker Compose de Producción**
+
+El sistema incluye una configuración completa de producción con:
+
+- **🐳 Aplicación**: Contenedor optimizado (~200MB)
+- **🌐 Nginx**: Reverse proxy con SSL y compresión
+- **📊 Monitoreo**: Health checks y métricas
+- **🔄 Logs**: Rotación automática y persistencia
+
+```bash
+# Comandos de gestión de producción
+./start-production.sh    # Iniciar todos los servicios
+./stop-production.sh     # Parar servicios (con opciones de limpieza)
+./monitor-production.sh  # Monitoreo en tiempo real
+```
+
+### **Scripts de Producción**
+
+**Iniciar Producción**:
+```bash
+./start-production.sh
+# - Valida Docker y dependencias
+# - Crea archivos de configuración
+# - Ejecuta health checks
+# - Reporta estado del deployment
+```
+
+**Parar Producción**:
+```bash
+./stop-production.sh
+# - Para servicios gracefully
+# - Opción de limpiar contenedores
+# - Opción de limpiar volúmenes
+# - Limpieza de imágenes no utilizadas
+```
+
+**Monitoreo**:
+```bash
+./monitor-production.sh
+# - Estado de servicios en tiempo real
+# - Métricas de recursos (CPU, RAM, disco)
+# - Health checks de endpoints
+# - Logs recientes
+# - Modo watch continuo
+```
+
+### **Arquitectura de Producción**
+
+```
+Internet → Nginx (Port 80/443) → Next.js App (Port 3000)
+    ↓
+Log Rotation Service → Persistent Volumes
+    ↓
+Health Monitoring → /api/health endpoint
+```
+
+### **Características de Producción**
+
+- **🔒 Seguridad**: Contenedores non-root, network isolation
+- **⚡ Performance**: Gzip, caching, resource limits
+- **📈 Escalabilidad**: 1000+ usuarios concurrentes
+- **🔍 Monitoreo**: Health checks cada 30s
+- **📱 Alta Disponibilidad**: Auto-restart, graceful shutdowns
+- **🗂️ Logs**: Rotación automática, 100MB por archivo
+
+### **Variables de Entorno - Producción**
+```bash
+# .env.production (ejemplo)
+NODE_ENV=production
+GEMINI_API_KEY=tu_gemini_api_key_produccion
+NEXT_PUBLIC_APP_NAME=ple.ad writer
+NEXT_PUBLIC_APP_URL=https://tu-dominio.com
+
+# Configuración de recursos
+DOCKER_CPU_LIMIT=1
+DOCKER_MEMORY_LIMIT=1g
+NGINX_CPU_LIMIT=0.5
+NGINX_MEMORY_LIMIT=256m
+```
+
+### **Troubleshooting de Producción**
+
+**Verificar estado**:
+```bash
+./monitor-production.sh
+docker compose -f docker-compose.prod.yml ps
+```
+
+**Ver logs específicos**:
+```bash
+docker compose -f docker-compose.prod.yml logs app
+docker compose -f docker-compose.prod.yml logs nginx
+```
+
+**Restart de servicio específico**:
+```bash
+docker compose -f docker-compose.prod.yml restart app
+docker compose -f docker-compose.prod.yml restart nginx
+```
+
+### **Documentación Detallada**
+
+Para información completa sobre deployment de producción, consulta:
+- 📘 **[PRODUCTION.md](PRODUCTION.md)** - Guía completa de producción
+- 📋 **[DEPLOY-SUMMARY.md](DEPLOY-SUMMARY.md)** - Resumen ejecutivo
+
+---
+
 ### 🔐 Configuración de IA (Opcional)
 
 Para habilitar la funcionalidad de IA con preview:
@@ -99,13 +329,20 @@ Para habilitar la funcionalidad de IA con preview:
 
 2. **Configurar variable de entorno**:
    ```bash
-   # Crear archivo .env en la raíz del proyecto
+   # Desarrollo
    echo "GEMINI_API_KEY=tu_api_key_aqui" > .env
+   
+   # Producción
+   echo "GEMINI_API_KEY=tu_api_key_aqui" >> .env.production
    ```
 
 3. **Reiniciar la aplicación**:
    ```bash
-   docker compose down && docker compose up --build
+   # Desarrollo
+   npm run dev
+   
+   # Producción
+   ./start-production.sh
    ```
 
 > **Nota**: La aplicación funciona completamente sin IA, solo no tendrás la funcionalidad de chat inteligente.
